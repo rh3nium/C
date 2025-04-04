@@ -3,6 +3,7 @@
 #include<stdio.h>
 int main() {
     int a = 12;
+    // while (condition) { code }
     while (a <= 20) {
         printf("%d\n", a);
         a = a + 1;
