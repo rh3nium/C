@@ -3,6 +3,7 @@
 #include<stdio.h>
 int main(){
     int num = 5;
+    // for (variable; condition; increment) { code }
     for (int i = 1; i <= 12; i++){
         printf("%d\n", num*i);
     }
