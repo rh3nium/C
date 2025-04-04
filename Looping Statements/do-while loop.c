@@ -3,7 +3,7 @@
 #include<stdio.h>
 void main(){
     int var = 10;
-    // do
+    // do { code }
     do {
         printf("%d\n", var);
         var++;
