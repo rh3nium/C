@@ -11,10 +11,9 @@ int main() {
         printf("Memory allocation failed\n");
         return 1; // Exit if fails
     }
-
     printf("Values after calloc(): ");
     for (i = 0; i < n; i++) {
-        printf("%d", &ptr[i]);
+        printf("%d", ptr[i]); /* Output: Values after calloc(): 00000 */
     }
     free(ptr);
     return 0;
