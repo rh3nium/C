@@ -1,2 +1,2 @@
 # C
-C programs and examples.
+C programs and examples
