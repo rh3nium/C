@@ -1,4 +1,4 @@
-// putw() - Add data to file
+// getw(), putw() - Gets and Write data to file
 
 #include <stdio.h>
 int main()
