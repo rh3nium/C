@@ -1,4 +1,4 @@
-// malloc() - Allocates memory block dynamically
+// malloc() - Allocates single memory block dynamically
 
 #include<stdio.h>
 #include<stdlib.h>
