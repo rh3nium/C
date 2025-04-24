@@ -1,4 +1,4 @@
-// Check student grade 
+// Check student grade using if-else if-else
 
 #include<stdio.h>
 int main(){
