@@ -4,13 +4,13 @@
 int main() {
     float temp;
     int choice;
-    // Display menu to user
     printf("Temperature Conversion\n");
+    // Display menu with options
     printf("1. Convert Fahrenheit to Celsius\n");
     printf("2. Convert Celsius to Fahrenheit\n");
     printf("Enter your choice - 1 or 2: ");
     scanf("%d", &choice);
-    // Perform conversion
+    // Perform conversion based on choice
     if(choice == 1) {
         printf("Enter temperature in Fahrenheit: ");
         scanf("%f", &temp);
