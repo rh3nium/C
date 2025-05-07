@@ -1,9 +1,9 @@
-// continue statement
+// goto statement
 
 #include<stdio.h>
 int main() {
-    start:
+    start: // define label
     printf("Hello \n");
-    goto start;
+    goto start; // goto label
     return 0;
 }
