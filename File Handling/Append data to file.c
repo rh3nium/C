@@ -9,7 +9,7 @@ int main()
     // Open file in append mode
     fp = fopen("input.txt", "a");
     while ((c = getchar()) != EOF) {
-        putc(c, fp);
+        putc(c, fp); // insert character in file
     }
     /* How to initiate the EOF signal and display output:
     On Windows, press Ctrl+Z
