@@ -7,7 +7,7 @@ struct Book {
     float price;
 };
 int main() {
-    struct Book b[5];
+    struct Book b[3];
     printf("Arrays of Structures\n");
     for (int i=0; i<3; i++) {
         printf("Enter id, title, and price of book %d:\n", i+1);
