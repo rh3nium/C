@@ -1,3 +1,5 @@
+// Stack definition and initialization
+
 #include <stdio.h>
 #define MAX 100
 
