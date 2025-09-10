@@ -1,4 +1,4 @@
-// Stack representation using array
+// Stack Representation using Array
 
 #include <stdio.h>
 
