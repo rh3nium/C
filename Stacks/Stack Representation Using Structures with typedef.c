@@ -2,7 +2,7 @@
 
 #include <stdio.h>
 
-// Define structure
+// Define structure with typedef
 typedef struct {
     int data[100];
     int top;
