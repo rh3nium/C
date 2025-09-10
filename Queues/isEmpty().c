@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define MAX 5 // A small size for easy demonstration
+#define MAX 5
 
 typedef struct {
     int data[MAX];
@@ -11,14 +11,14 @@ typedef struct {
     int rear;
 } *Queue;
 
-// Function to check if the queue is empty
+// isEmpty()
 int isEmpty(Queue q) {
     // Condition 1: Initial state of an empty queue
     // Condition 2: All elements have been dequeued
     return q->front == -1 || q->front > q->rear;
 }
 
-// Function to check if the queue is full
+// isFull()
 int isFull(Queue q) {
     return q->rear == MAX - 1;
 }
@@ -32,7 +32,7 @@ void initializeQueue(Queue q) {
     }
 }
 
-// Function to add an element to the queue
+// enqueue() - Function to add an element to the queue
 void enqueue(Queue q, int value) {
     if (isFull(q)) {
         printf("Queue is full! Cannot enqueue %d.\n", value);
@@ -46,7 +46,7 @@ void enqueue(Queue q, int value) {
     }
 }
 
-// Function to remove an element from the queue
+// dequeue() - Function to remove an element from the queue
 int dequeue(Queue q) {
     if (isEmpty(q)) {
         printf("Queue is empty! Cannot dequeue.\n");
@@ -65,7 +65,7 @@ int dequeue(Queue q) {
     }
 }
 
-// Function to display the elements of the queue
+// Function to display the elements of queue
 void display(Queue q) {
     if (isEmpty(q)) {
         printf("Queue is empty.\n");
@@ -86,7 +86,8 @@ int main() {
     }
     
     initializeQueue(q);
-    
+
+    // isEmpty() - Check if queue is empty
     printf("\nIs the queue empty? %s\n", isEmpty(q) ? "Yes" : "No");
     
     // Add elements
