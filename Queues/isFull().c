@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define MAX 5 // Using a small size to easily demonstrate a full queue
+#define MAX 5
 
 typedef struct {
     int data[MAX];
@@ -11,12 +11,12 @@ typedef struct {
     int rear;
 } *Queue;
 
-// Function to check if the queue is full
+// isFull()
 int isFull(Queue q) {
     return q->rear == MAX - 1;
 }
 
-// Function to check if the queue is empty
+// isEmpty()
 int isEmpty(Queue q) {
     return q->front == -1;
 }
@@ -30,7 +30,7 @@ void initializeQueue(Queue q) {
     }
 }
 
-// Function to add an element to the queue
+// enqueue() - Function to add an element to the queue
 void enqueue(Queue q, int value) {
     if (isFull(q)) {
         printf("Queue is full! Cannot enqueue %d.\n", value);
@@ -44,7 +44,7 @@ void enqueue(Queue q, int value) {
     }
 }
 
-// Function to display the elements of the queue
+// enqueue() - Function to display the elements of the queue
 void display(Queue q) {
     if (isEmpty(q)) {
         printf("Queue is empty.\n");
@@ -65,7 +65,8 @@ int main() {
     }
     
     initializeQueue(q);
-    
+
+    // isFull() - Check if queue is full
     printf("\nIs the queue full? %s\n\n", isFull(q) ? "Yes" : "No");
     
     // Fill the queue
@@ -75,7 +76,7 @@ int main() {
     
     display(q);
     
-    // Check if the queue is full after filling it
+    // Check if queue is full after filling it
     printf("\nIs the queue full? %s\n\n", isFull(q) ? "Yes" : "No");
 
     // Attempt to enqueue another element to show the full check working
