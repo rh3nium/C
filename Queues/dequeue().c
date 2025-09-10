@@ -66,7 +66,7 @@ void display(Queue q) {
 }
 
 int main() {
-    Queue q = (Queue)malloc(sizeof(struct Queue));
+    Queue q = (Queue)malloc(sizeof(*q));
     if (q == NULL) {
         printf("Memory allocation failed.\n");
         return 1;
