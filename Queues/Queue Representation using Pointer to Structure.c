@@ -80,17 +80,17 @@ void display(Queue q) {
 }
 
 int main() {
-    // 1. Declare a Queue pointer
+    // Declare a Queue pointer
     Queue q = NULL;
 
-    // 2. Allocate memory for the queue structure
+    // Allocate memory for the queue structure
     q = (Queue) malloc(sizeof(struct Queue));
     if (q == NULL) {
         printf("Memory allocation failed.\n");
         return 1;
     }
 
-    // 3. Perform queue operations
+    // Perform queue operations
     initializeQueue(q);
     enqueue(q, 10);
     enqueue(q, 20);
@@ -100,7 +100,7 @@ int main() {
     dequeue(q);
     display(q);
     
-    // 4. Free the allocated memory
+    // Free the allocated memory
     free(q);
     q = NULL; // Best practice to prevent dangling pointer
     printf("\nMemory freed.\n");
