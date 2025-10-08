@@ -6,49 +6,44 @@ typedef struct Node {
     int data;
     struct Node* next;
 } Node;
+
 // Create node
 Node* createNode(int data) {
     Node* newNode = (Node*)malloc(sizeof(Node));
-    if (newNode == NULL) {
+    if (newNode==NULL) {
         printf("No memory\n");
         return NULL;
     }
-    newNode->data = data;
-    newNode->next = NULL;
+    newNode->data=data;
+    newNode->next=NULL;
     return newNode;
 }
+
 
 // Insert at front
 Node* insertFront(Node* head, int data) {
     Node* newNode = createNode(data);
-    if (newNode == NULL) return head;
-    newNode->next = head;
-    return newNode;
+    newNode->next=head;
+    head=newNode;
+    return head;
 }
-/* New node points to the old head.
-head pointer is updated to the new node
-Time Complexity - O(1)
-*/
 
 // Insert at rear
 Node* insertRear(Node* head, int data) {
     Node* newNode = createNode(data);
     if (newNode == NULL) return head;
-
     if (head == NULL) {
         return newNode;
     }
-
     Node* current = head;
     while (current->next != NULL) {
         current = current->next;
     }
-
     current->next = newNode;
     return head;
 }
 
-// Delete from front
+// Delete at front
 Node* deleteFront(Node* head) {
     if (head == NULL) {
         printf("List is empty\n");
@@ -60,32 +55,30 @@ Node* deleteFront(Node* head) {
     return head;
 }
 
-// Delete from rear
+// Delete at rear
 Node* deleteRear(Node* head) {
     if (head == NULL) {
-        printf("List is empty\n");
+        printf("List empty\n");
         return NULL;
     }
-
     if (head->next == NULL) {
         free(head);
         return NULL;
     }
-
     Node* current = head;
     Node* previous = NULL;
-
+    
     while (current->next != NULL) {
         previous = current;
         current = current->next;
     }
-
     previous->next = NULL;
-    free(current); 
+    free(current);
     return head;
 }
 
-// Display linked list elements
+
+// Display linked list
 void displayList(Node* head) {
     if (head == NULL) {
         printf("List is currently empty\n");
@@ -98,55 +91,49 @@ void displayList(Node* head) {
         if (current->next != NULL) {
             printf(" -> ");
         }
-        current = current->next;
+        current = current -> next;
     }
     printf("\n");
 }
 
 // MAIN FUNCTION
 int main() {
-    Node* head = NULL;
-
-    printf("Start of Operations\n");
-    displayList(head);
-
-    // Insert at Front
-    printf("\nINSERT FRONT OPERATIONS\n");
-    head = insertFront(head, 10);
-    printf("Inserted 10 at front. "); displayList(head);
+    Node* head = createNode(10);
+    printf("Node created with data: %d\n", head->data);
+    head = insertFront(head, 20);
+    printf("New head data: %d\n", head->data);
     
+    // Insert at front
+    printf("\nInserting FRONT nodes:\n");
     head = insertFront(head, 5);
-    printf("Inserted 5 at front. "); displayList(head);
+    head = insertFront(head, 33);
+    head = insertFront(head, 996);
+    displayList(head);
     
-    // Insert at Rear
-    printf("\nINSERT REAR OPERATIONS\n");
-    head = insertRear(head, 20);
-    printf("Inserted 20 at rear. "); displayList(head);
-    
-    head = insertRear(head, 30);
-    printf("Inserted 30 at rear. "); displayList(head);
-
-    // Delete at Front
-    printf("\nDELETE FRONT OPERATIONS\n");
+    // Delete at front
+    printf("\nDeleting FRONT node:\n");
     head = deleteFront(head);
-    printf("Deleted from front (5). "); displayList(head);
+    displayList(head);
     
-    head = deleteFront(head);
-    printf("Deleted from front (10). "); displayList(head);
+    // Insert at rear
+    printf("\nInserting REAR node:\n");
+    head = insertRear(head, 222);
+    displayList(head);
     
-    // Delete at Rear
-    printf("\nDELETE REAR OPERATIONS\n");
+    // Delete at rear
+    printf("\nDeleting REAR node:\n");
     head = deleteRear(head);
-    printf("Deleted from rear (30). "); displayList(head);
-    
     head = deleteRear(head);
-    printf("Deleted from rear (20). "); displayList(head);
-
+    head = deleteRear(head);
+    head = deleteRear(head);
+    head = deleteRear(head);
+    displayList(head);
+    
     // Check empty list state
-    printf("\nFinal State Check\n");
+    printf("\nFinal State Check:\n");
     head = deleteFront(head);
     head = deleteRear(head);
     displayList(head);
-
+    
     return 0;
 }
