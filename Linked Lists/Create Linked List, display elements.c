@@ -36,7 +36,7 @@ void displayList(Node* head) {
     printf("\n");
 }
 
-
+// MAIN FUNCTION
 int main() {
     Node* head = createNode(10);
     printf("Node created with data: %d\n", head->data);
