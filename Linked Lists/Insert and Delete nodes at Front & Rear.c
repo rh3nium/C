@@ -25,6 +25,10 @@ Node* insertFront(Node* head, int data) {
     newNode->next = head;
     return newNode;
 }
+/* New node points to the old head.
+head pointer is updated to the new node
+Time Complexity - O(1)
+*/
 
 // Insert at rear
 Node* insertRear(Node* head, int data) {
