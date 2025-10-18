@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+// Singly Linked List Node Structure
 typedef struct Node {
     int data;
     struct Node* next;
