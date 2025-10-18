@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+// Node structure
 typedef struct Node {
     int data;
     struct Node* next;
@@ -18,7 +19,7 @@ Node* createNode(int data) {
     return newNode;
 }
 
-// Insert at front
+// Insert at Front
 Node* insertFront(Node* head, int data) {
     Node* newNode = createNode(data);
     newNode->next=head;
@@ -26,7 +27,7 @@ Node* insertFront(Node* head, int data) {
     return head;
 }
 
-// Insert at rear
+// Insert at Rear
 Node* insertRear(Node* head, int data) {
     Node* newNode = createNode(data);
     if (newNode == NULL) return head;
@@ -41,7 +42,7 @@ Node* insertRear(Node* head, int data) {
     return head;
 }
 
-// Delete from front
+// Delete at Front
 Node* deleteFront(Node* head) {
     if (head == NULL) {
         printf("List is empty\n");
@@ -53,7 +54,7 @@ Node* deleteFront(Node* head) {
     return head;
 }
 
-// Delete from rear
+// Delete at Rear
 Node* deleteRear(Node* head) {
     if (head == NULL) {
         printf("List empty\n");
@@ -87,9 +88,11 @@ Node* insertByPosition (Node* head, int data, int position) {
     }
     Node* newNode = createNode(data);
     if (newNode == NULL) return head;
+
     Node* current = head;
     Node* previous = NULL;
     int current_position = 1;
+    
     // Traverse to the node before the target insert position
     while (current != NULL && current_position < position) {
         previous = current;
@@ -181,6 +184,7 @@ void displayList(Node* head) {
     printf("\n");
 }
 
+
 // MAIN FUNCTION
 int main() {
     Node* head = createNode(10);
@@ -188,24 +192,24 @@ int main() {
     head = insertFront(head, 20);
     printf("New head data: %d\n", head->data);
     
-    // Insert at front
+    // Insert at Front
     printf("\nInserting FRONT nodes:\n");
     head = insertFront(head, 5);
     head = insertFront(head, 33);
     head = insertFront(head, 996);
     displayList(head);
     
-    // Delete at front
+    // Delete at Front
     printf("\nDeleting FRONT node:\n");
     head = deleteFront(head);
     displayList(head);
     
-    // Insert at rear
+    // Insert at Rear
     printf("\nInserting REAR node:\n");
     head = insertRear(head, 222);
     displayList(head);
     
-    // Delete at rear
+    // Delete at Rear
     printf("\nDeleting REAR node:\n");
     head = deleteRear(head);
     head = deleteRear(head);
@@ -213,39 +217,33 @@ int main() {
     head = deleteRear(head);
     head = deleteRear(head);
     displayList(head);
-    
-    printf("\n");
-    
-    // Insert at position
-    printf("Inserting 88 at position 3:\n");
-    head = insertByPosition(head, 88, 3); // Output: 996 -> 33 -> 88 -> 5 -> 20 -> 10
+        
+    // Insert at Position
+    printf("\nInserting 88 at position 3:\n");
+    head = insertByPosition(head, 88, 3); // List: 996 -> 33 -> 88 -> 5 -> 20 -> 10
     displayList(head);
     
     printf("Inserting 1 at position 1 (front):\n");
-    head = insertByPosition(head, 1, 1); // Output: 1 -> 996 -> 33 -> 88 -> 5 -> 20 -> 10
+    head = insertByPosition(head, 1, 1); // List: 1 -> 996 -> 33 -> 88 -> 5 -> 20 -> 10
     displayList(head);
     
-    printf("\n");
-
-    // Delete at position
-    printf("Deleting node at position 3 (88):\n");
+    // Delete at Position
+    printf("\nDeleting node at position 3 (88):\n");
     head = deletebyPosition(head, 3); // Removes 88
-    displayList(head); // Output: 996 -> 33 -> 5 -> 20 -> 10
+    displayList(head); // List: 996 -> 33 -> 5 -> 20 -> 10
 
     printf("Deleting node at position 1 (996):\n");
     head = deletebyPosition(head, 1); // Removes 996
-    displayList(head); // Output: 33 -> 5 -> 20 -> 10
+    displayList(head); // List: 33 -> 5 -> 20 -> 10
     
-    printf("\n");
-
-    // Search by position
+    // Search by Position
     int data_pos3 = searchByPosition(head, 3); // Should find 33
-    if (data_pos3 != -1) printf("Data at position 3 is: %d\n", data_pos3);
+    if (data_pos3 != -1) printf("\nData at position 3 is: %d\n", data_pos3);
     
     int data_pos7 = searchByPosition(head, 7); // Should find 10
     if (data_pos7 != -1) printf("Data at position 7 is: %d\n", data_pos7);
     
-    printf("Searching out-of-bounds position 10:\n");
+    printf("\nSearching out-of-bounds position 10:\n");
     searchByPosition(head, 10);
     
     
