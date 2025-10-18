@@ -105,7 +105,6 @@ Node* insertByPosition (Node* head, int data, int position) {
     if (position == 1) {
         return insertFront(head, data);
     }
-
     Node* newNode = createNode(data);
     if (newNode == NULL) return head;
 
@@ -117,7 +116,7 @@ Node* insertByPosition (Node* head, int data, int position) {
         current = current->next;
         current_position++;
     }
-
+    
     if (current == NULL) {
         printf("Position %d is out of bounds. Cannot insert.\n", position);
         free(newNode);
@@ -149,7 +148,6 @@ Node* deleteByPosition(Node* head, int position) {
     if (position == 1) {
         return deleteFront(head);
     }
-
     Node* current = head;
     int current_position = 1;
 
@@ -157,7 +155,7 @@ Node* deleteByPosition(Node* head, int position) {
         current = current->next;
         current_position++;
     }
-
+    
     if (current == NULL) {
         printf("Position %d is out of bounds. Cannot delete.\n", position);
         return head;
@@ -167,7 +165,6 @@ Node* deleteByPosition(Node* head, int position) {
     if (current->prev != NULL) {
         current->prev->next = current->next;
     }
-
     if (current->next != NULL) {
         current->next->prev = current->prev;
     }
@@ -196,7 +193,25 @@ int searchByPosition(Node* head, int position) {
     }
 }
 
-// Display the linked list (forward traversal)
+// Search node by Value
+int searchByValue(Node* head, int value) {
+    Node* current = head;
+    int position = 1;
+
+    // Traverse the list until the end or until the value is found
+    while (current != NULL) {
+        if (current->data == value) {
+            return position; // Return the 1-based position of the first occurrence
+        }
+        current = current->next;
+        position++;
+    }
+
+    // If the loop finishes without finding the value
+    return -1; // Value not found
+}
+
+// Display linked list (forward traversal)
 void displayList(Node* head) {
     if (head == NULL) {
         printf("List is currently empty\n");
@@ -220,38 +235,42 @@ int main() {
     Node* head = NULL; 
 
     // Insert at Front/Rear
-    printf("Insert Front (10, 20) & Rear (30, 40):\n");
+    printf("INSERT FRONT (10, 20) & REAR (30, 40):\n");
     head = insertFront(head, 10);
     head = insertFront(head, 20);
     head = insertRear(head, 30);
-    head = insertRear(head, 40);
-    // List: 20 <-> 10 <-> 30 <-> 40
+    head = insertRear(head, 40); // List: 20 <-> 10 <-> 30 <-> 40
     displayList(head); 
 
     // Insert at Position
-    printf("\nInsert 55 at Position 3:\n");
+    printf("\nINSERT 55 at POSITION 3:\n");
     head = insertByPosition(head, 55, 3); // Inserts 55 between 10 and 30
-    // List: 20 <-> 10 <-> 55 <-> 30 <-> 40
-    displayList(head); 
+    displayList(head); // List: 20 <-> 10 <-> 55 <-> 30 <-> 40
 
     // Delete at Position
-    printf("Delete at Position 2:\n");
+    printf("DELETE at POSITION 2:\n");
     head = deleteByPosition(head, 2); // Deletes 10
-    // List: 20 <-> 55 <-> 30 <-> 40
-    displayList(head); 
+    displayList(head); // List: 20 <-> 55 <-> 30 <-> 40
 
     // Delete at Front/Rear
-    printf("\nDelete at Front & Rear:\n");
+    printf("\nDELETE at FRONT & REAR:\n");
     head = deleteFront(head); // Deletes 20
     head = deleteRear(head);  // Deletes 40
-    // List: 55 <-> 30
-    displayList(head); 
+    displayList(head); // List: 55 <-> 30
 
-    // Search by position
-    printf("\nSearch by Position 1:\n");
+    // Search by Position
+    printf("\nSEARCH by POSITION 1:\n");
     int data = searchByPosition(head, 1);
     if (data != -1) printf("Node found: %d\n", data);
 
+    // Search by Value
+    printf("\n3. SEARCH for VALUE 55:\n");
+    int pos_val = searchByValue(head, 55);
+    if (pos_val != -1) {
+        printf("Value 55 found at position: %d\n", pos_val);
+    } else {
+        printf("Value 55 not found.\n");
+    }
 
     // Cleanup
     printf("\nFinal Cleanup:\n");
