@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>C Repository | Riya h</title>
+  <link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Consolas', monospace;
+      background-color: black;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    .scanlines {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(0, 255, 255, 0.22) 0px,
+        rgba(0, 255, 255, 0.22) 2px,
+        transparent 2px,
+        transparent 4px
+      );
+      animation: moveScanlines 6s linear infinite;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    @keyframes moveScanlines {
+      from { background-position-y: 0; }
+      to { background-position-y: -100px; }
+    }
+
+    h1 {
+      font-family: 'Silkscreen', cursive;
+      font-size: 40px;
+      font-weight: 700;
+      text-align: center;
+      color: cyan;
+      margin-top: 40px;
+      text-shadow: 0 0 20px cyan;
+      z-index: 1;
+    }
+
+    .box {
+      background-color: #1a1a1a;
+      border: 1px solid cyan;
+      box-shadow: 0 0 15px white;
+      border-radius: 10px;
+      width: 80%;
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px 30px;
+      z-index: 1;
+      transition: all 0.3s ease-in-out;
+      transform: scale(1);
+      position: relative;
+    }
+
+    .box:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 25px white;
+    }
+
+    h2 {
+      color: cyan;
+      margin-top: 0;
+      font-size: 24px;
+    }
+
+    p, li {
+      font-size: 20px;
+      line-height: 1.6;
+    }
+
+    a {
+      color: #00ffff;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    a:hover {
+      text-decoration: underline;
+      color: white;
+    }
+
+    code {
+      background-color: #333;
+      padding: 3px 6px;
+      border-radius: 4px;
+      color: #00ffff;
+      display: inline-block;
+      font-size: 18px;
+    }
+
+    pre {
+      background-color: #222;
+      border-left: 3px solid cyan;
+      padding: 10px;
+      overflow-x: auto;
+    }
+
+    img {
+      display: block;
+      margin: 10px auto;
+      border-radius: 8px;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 10px;
+    }
+    ul li::before {
+      content: ">> ";
+      color: cyan;
+      font-weight: bold;
+    }
+    ol {
+      padding-left: 40px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="scanlines"></div>
+
+  <h1><span style="font-family: Arial;"><b>{</b></span> C Repository <span style="font-family: Arial;">}</span></h1>
+
+  <div class="box">
+    <h2>💻 C Overview</h2>
+    <img height="200" alt="C language image" src="https://github.com/user-attachments/assets/194bfc1f-8bfb-4ee1-9b1b-5d734c65a4a3" />
+    <p><b>C</b> is a powerful, general-purpose programming language that provides a foundation for many modern languages. Known for its efficiency and control, C is commonly used in system programming, embedded development, and operating systems.</p>
+    <p>This repository includes structured C programs organized by concept, making it ideal for learning or quick reference.</p>
+  </div>
+
+  <div class="box">
+    <h2>📁 Sub-folders</h2>
+    <ul>
+      <li><a href="https://github.com/rh3nium/C/tree/main/Arrays">Arrays</a></li>
+      <li><a href="https://github.com/rh3nium/C/tree/main/Conditional%20Statements">Conditional Statements</a></li>
+      <li><a href="https://github.com/rh3nium/C/tree/main/Examples">Examples</a></li>
+      <li><a href="https://github.com/rh3nium/C/tree/main/File%20Handling">File Handling</a></li>
+      <li><a href="https://github.com/rh3nium/C/tree/main/Functions">Functions</a></li>
+      <li><a href="https://github.com/rh3nium/C/tree/main/Input%20and%20Output%20Functions">Input and Output Functions</a></li>
+      <li><a href="https://github.com/rh3nium/C/tree/main/Jumping%20Statements">Jumping Statements</a></li>
+      <li><a href="https://github.com/rh3nium/C/tree/main/Linked%20Lists">Linked Lists</a></li>
+      <li><a href="https://github.com/rh3nium/C/tree/main/Looping%20Statements">Looping Statements</a></li>
+      <li><a href="https://github.com/rh3nium/C/tree/main/Memory%20Allocation">Memory Allocation</a></li>
+      <li><a href="https://github.com/rh3nium/C/tree/main/Operators">Operators</a></li>
+      <li><a href="https://github.com/rh3nium/C/tree/main/Pointers">Pointers</a></li>
+      <li><a href="https://github.com/rh3nium/C/tree/main/Preprocessor%20Directives%20and%20Macros">Preprocessor Directives and Macros</a></li>
+      <li><a href="https://github.com/rh3nium/C/tree/main/Queues">Queues</a></li>
+      <li><a href="https://github.com/rh3nium/C/tree/main/Searching%20and%20Sorting">Searching and Sorting</a></li>
+      <li><a href="https://github.com/rh3nium/C/tree/main/Stacks">Stacks</a></li>
+      <li><a href="https://github.com/rh3nium/C/tree/main/Strings">Strings</a></li>
+      <li><a href="https://github.com/rh3nium/C/tree/main/Structures">Structures</a></li>
+      <li><a href="https://github.com/rh3nium/C/tree/main/Type%20Conversion">Type Conversion</a></li>
+      <li><a href="https://github.com/rh3nium/C/tree/main/Unions">Unions</a></li>
+      <li><a href="https://github.com/rh3nium/C/tree/main/Variables">Variables</a></li>
+    </ul>
+  </div>
+
+  <div class="box">
+    <h2>🧩 Steps to Clone and Run this Repository</h2>
+    <ol>
+      <li>Run the git clone command to make a copy of this repository on your local machine:
+        <pre><code>git clone https://github.com/rh3nium/C</code></pre>
+      </li>
+      <li>Navigate to the folder:
+        <pre><code>cd C</code></pre>
+      </li>
+      <li>Compile any C file using GCC:
+        <pre><code>gcc filename.c -o output</code></pre>
+      </li>
+      <li>Run the program:
+        <pre><code>./output</code></pre>
+      </li>
+    </ol>
+  </div>
+
+  <div class="box">
+    <h2>⚙️ Setting up a C Compiler</h2>
+    <p><b>To compile and run C programs on your computer, you need a C compiler such as GCC or Clang.</b></p>
+    <ol>
+      <li>Visit the <a href="https://gcc.gnu.org/install/">GCC official installation page</a>.</li>
+      <li>Install GCC via your package manager or IDE (e.g., Code::Blocks, Visual Studio Code).</li>
+      <li>After installation, verify by running this command in Terminal:
+        <pre><code>gcc --version</code></pre>
+      </li>
+      <li>Now you are ready to write, compile, and execute C programs.</li>
+    </ol>
+  </div>
+</body>
+</html>
