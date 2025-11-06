@@ -170,7 +170,7 @@ int main() {
     // Delete remaining nodes
     Head = deleteFrontCSLL(Head);
     Head = deleteFrontCSLL(Head);
-    printf("After deleting remaining nodes:\n");
+    printf("\nAfter deleting remaining nodes:\n");
     displayCSLL(Head);
     
     return 0;
