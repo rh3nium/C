@@ -16,7 +16,6 @@ because that is the value of the last expression in the chain.
 */
 
 #include <stdio.h> // This is for printf()
-
 int print_return_num(int num) {
     printf("in print_return_num(%d)\n");
 
@@ -28,7 +27,6 @@ void print_before_eval() {
     printf("in print_before_eval()\n");
 }
 
-#include <stdio.h>
 int main()
 {
     // This is the expression chaining context and is not well known
