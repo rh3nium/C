@@ -24,7 +24,7 @@
 #define SET_BIT(number, bit_to_set) number |= (1 << bit_to_set)
 #define UNSET_BIT(number, bit_to_unset) number &= (~(1 << bit_to_unset))
 
-// PLEASE NOTE THIS ONLY WORKS ON STATIC ARRAYS AN NOT POINTERS OR ARRAYS DECAYED INTO POINTERS
+// PLEASE NOTE THIS ONLY WORKS ON STACK-BASED ARRAYS AN NOT POINTERS OR ARRAYS DECAYED INTO POINTERS
 #define ArrayCount(array) (int)(sizeof(array) / sizeof(array[0]))
 
 int main() {
