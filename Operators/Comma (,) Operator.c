@@ -1,5 +1,7 @@
+// -- Comma (,) Operator -- //
+
 /*
-Comma (,) Operator has two contexts:
+This operator has two contexts:
 
 1. - Function Argument Context -  
 When used to separate function arguments, the **order of evaluation is unspecified**.  
@@ -30,7 +32,7 @@ void print_before_eval() {
 int main()
 {
     // This is the expression chaining context and is not well known
-    // 30 basically does nothing here and the compile will warn on this
+    // 30 basically does nothing here and the compiler will warn on this
     int num = (30, print_before_eval(), print_return_num(63)); 
     printf("num: %d\n", num); // this will print 63
 
