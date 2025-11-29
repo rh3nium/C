@@ -1,16 +1,40 @@
-// comma (,) Operator
-// Separates expressions
+/*
+Comma (,) Operator has two contexts:
+
+1. - Function Argument Context -  
+When used to separate function arguments, the **order of evaluation is unspecified**.  
+Example: func_with_parameters(ret_print_1(), ret_print_2(), ret_print_3());
+The output might be 2, 1, 3, etc., depending on the compiler,  
+but it is guaranteed that the correct value is passed to each argument.
+
+2. - Expression Chaining Context -
+When used as an expression chain, the comma operator evaluates expressions **from left to right**  
+and the value of the **last expression** is returned.  
+Example: int a = (ret_print_1(), ret_print_2(), ret_print_3());
+Here, it will always print 1, 2, 3, and `a` will store 3,  
+because that is the value of the last expression in the chain.
+*/
+
+#include <stdio.h> // This is for printf()
+
+int print_return_num(int num) {
+    printf("in print_return_num(%d)\n");
+
+    return num;
+}
+
+
+void print_before_eval() {
+    printf("in print_before_eval()\n");
+}
 
 #include <stdio.h>
 int main()
 {
-    int num = 30;
-    char chr = 'A';
-    // Using comma to separate operands
-    printf("Address of num: %d \nAddress of chr: %p ", &num, &chr);
-}
+    // This is the expression chaining context and is not well known
+    // 30 basically does nothing here and the compile will warn on this
+    int num = (30, print_before_eval(), print_return_num(63)); 
+    printf("num: %d\n", num); // this will print 63
 
-/* Output:
-Address of num: -1316141524
-Address of chr: 0x7ff7b18d462b
-*/
+    return 0;
+}
