@@ -6,7 +6,7 @@
 #define stringify(a) #a
 
 // This is a way to do X-Macros
-// essencially you are predefininig data
+// essencially nested macros with predefininig data
 // and can use C's preprocessor system to later
 // define an X macros and change the bahvior of what
 // gets text replaced. You will notice that in this 
