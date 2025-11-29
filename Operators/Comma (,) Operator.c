@@ -4,7 +4,7 @@ Comma (,) Operator has two contexts:
 1. - Function Argument Context -  
 When used to separate function arguments, the **order of evaluation is unspecified**.  
 Example: func_with_parameters(ret_print_1(), ret_print_2(), ret_print_3());
-The output might be 2, 1, 3, etc., depending on the compiler,  
+The output might be 2, 1, 3, depending on the compiler,  
 but it is guaranteed that the correct value is passed to each argument.
 
 2. - Expression Chaining Context -
