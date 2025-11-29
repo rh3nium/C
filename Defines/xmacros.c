@@ -11,12 +11,15 @@
 // define an X macros and change the bahvior of what
 // gets text replaced. You will notice that in this 
 // example I only use the 'token' but in the commented example
-// I show a use with both 'token' and 'str'
+// I show a usecase with both 'token' and 'str'
+
+// Look how easy it is to just add new tokens now its a single line
 #define X_SYNTAX_TOKENS    \
     X(TOKEN_PLUS, "+")     \
     X(TOKEN_MINUS, "-")    \
     X(TOKEN_STAR, "*")     \
     X(TOKEN_DIVISION, "/") \
+    // X(TOKEN_EQUAL, "=") \
 
 #define X_KEYWORD_TOKENS      \
     X(TOKEN_IF, "if")       \
@@ -86,6 +89,7 @@ int main() {
     printf("token name: %s\n", token_kind_get_string(TOKEN_PLUS));
     printf("token name: %s\n", token_kind_get_string(TOKEN_IF));
     printf("token name: %s\n", token_kind_get_string(TOKEN_STAR));
+    // printf("token name: %s\n", token_kind_get_string(TOKEN_EQUAL));
     printf("token name: %s\n", token_kind_get_string(-1)); // assert
 
     return 0;
