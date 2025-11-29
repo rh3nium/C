@@ -36,3 +36,9 @@ int main()
 
     return 0;
 }
+
+/* Output:
+in print_before_eval()
+in print_return_num(1874898848)
+num: 63
+*/
