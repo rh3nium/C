@@ -1,4 +1,4 @@
-// -- X-macros -- //
+// -- X-Macros -- //
 
 #include <stdio.h>
 #include <assert.h>
