@@ -1,4 +1,4 @@
-// Bubble Sort Algorithm
+// -- Bubble Sort Algorithm -- //
 
 #include <stdio.h>
 void swap(int* arr, int i, int j) {
