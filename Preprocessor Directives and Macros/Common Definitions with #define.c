@@ -1,3 +1,5 @@
+// -- Common macro definitions using #define -- //
+
 #include <stdio.h>
 #include <math.h>
 #include <stddef.h>
