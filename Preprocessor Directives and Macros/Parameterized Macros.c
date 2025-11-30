@@ -1,4 +1,4 @@
-// Parameterized Macros
+// -- Parameterized Macros -- //
 
 #include <stdio.h>
 // Parameterized macros
