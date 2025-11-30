@@ -1,4 +1,4 @@
-// Simple Macro Substitution Directive
+// -- Simple Macro Substitution Directive -- //
 
 #include<stdio.h>
 // Define macro
