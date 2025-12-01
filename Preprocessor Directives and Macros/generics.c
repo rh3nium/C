@@ -27,7 +27,7 @@ typedef enum JSONType {
     JSON_TYPE_INT,
     JSON_TYPE_FLOAT,
     JSON_TYPE_STRING,
-    //. JSON_TYPE_ARRAY,
+    // JSON_TYPE_ARRAY,
     JSON_TYPE_JSON,
     JSON_TYPE_NULL,
 } JSONType;
