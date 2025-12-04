@@ -1,4 +1,4 @@
-// Queue Representation using Structure
+//-- Queue Representation using Structure --//
 
 #include <stdio.h>
 #define MAX 100
@@ -9,23 +9,41 @@ struct Queue {
     int front;
     int rear;
 };
+struct Queue q; // Declare a global instance of the queue structure
 
-// Declare a global instance of the queue structure
-struct Queue q;
-
-// Function to initialize the queue
+// initializeQueue() - Initializes queue
 void initializeQueue() {
     q.front = -1;
     q.rear = -1;
     printf("Queue initialized.\n");
 }
 
-// Function to add an element to the queue
+// isFull() - Checks if queue is full
+int isFull() {
+    return q.rear == MAX - 1;
+}
+
+// isEmpty() - Checks if queue is empty
+int isEmpty() {
+    return q.front == -1;
+}
+
+// peek() - Returns front element without removing it
+int peek() {
+    if (isEmpty()) {
+        printf("Queue is empty! No front element.\n");
+        return -1;
+    }
+    printf("Front element is: %d\n", q.data[q.front]);
+    return q.data[q.front];
+}
+
+// enqueue() - Adds element to queue
 void enqueue(int data) {
-    if (q.rear == MAX - 1) {
+    if (isFull()) {
         printf("Queue is full! Cannot enqueue %d.\n", data);
     } else {
-        if (q.front == -1) {
+        if (isEmpty()) {
             q.front = 0;
         }
         q.rear++;
@@ -34,10 +52,10 @@ void enqueue(int data) {
     }
 }
 
-// Function to remove an element from the queue
+// dequeue() - Removes element from queue
 int dequeue() {
     int data;
-    if (q.front == -1) {
+    if (isEmpty()) {
         printf("Queue is empty! Cannot dequeue.\n");
         return -1;
     } else {
@@ -53,9 +71,9 @@ int dequeue() {
     }
 }
 
-// Function to display the elements of the queue
+// display() - Prints all elements of the queue
 void display() {
-    if (q.front == -1) {
+    if (isEmpty()) {
         printf("Queue is empty.\n");
     } else {
         printf("Queue elements: ");
@@ -66,13 +84,22 @@ void display() {
     }
 }
 
+// MAIN FUNCTION
 int main() {
     initializeQueue();
+
+    // Check before operations
+    printf("Is queue empty? %s\n", isEmpty() ? "Yes" : "No");
+    printf("Is queue full? %s\n", isFull() ? "Yes" : "No");
+    peek();
+
     enqueue(10);
     enqueue(20);
     enqueue(30);
     display();
     
+    peek();
+
     dequeue();
     display();
     
