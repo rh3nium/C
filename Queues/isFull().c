@@ -44,7 +44,7 @@ void enqueue(Queue q, int value) {
     }
 }
 
-// enqueue() - Function to display the elements of the queue
+// Function to display the elements of the queue
 void display(Queue q) {
     if (isEmpty(q)) {
         printf("Queue is empty.\n");
