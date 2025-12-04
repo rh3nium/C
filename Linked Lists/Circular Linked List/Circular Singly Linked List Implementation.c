@@ -5,14 +5,14 @@
 #include <limits.h> 
 
 // Structure of a Node — Circular Singly Linked List
-typedef struct CSLL_Node {
+typedef struct Node {
     int data;
-    struct CSLL_Node *next;
-} CSLL_Node; 
+    struct Node *next;
+} Node; 
 
 // --- Create a Node ---
-CSLL_Node* createCSLLNode(int data) {
-    CSLL_Node* newNode = (CSLL_Node*)malloc(sizeof(CSLL_Node));
+Node* createNode(int data) {
+    Node* newNode = (Node*)malloc(sizeof(Node));
     
     if (!newNode) {
         printf("No Memory\n");
@@ -20,19 +20,19 @@ CSLL_Node* createCSLLNode(int data) {
     }
     
     newNode->data = data;
-    newNode->next = newNode; // Points to itself for a single node
+    newNode->next = newNode;  // Points to itself
     
     return newNode;
 }
 
-// --- Traversal (Display) ---
-void displayCSLL(CSLL_Node* Head) {
+// --- Traversal / Display ---
+void displayList(Node* Head) {
     if (Head == NULL) {
         printf("List Empty\n");
         return;
     }
     
-    CSLL_Node* Temp = Head;
+    Node* Temp = Head;
     printf("CSLL: ");
     
     do {
@@ -43,135 +43,133 @@ void displayCSLL(CSLL_Node* Head) {
     printf("(Head)\n");
 }
 
-// --- Insert Front ---
-CSLL_Node* insertFrontCSLL(CSLL_Node* Head, int data) {
-    CSLL_Node* newNode = createCSLLNode(data);
+// --- Insert at Front ---
+Node* insertAtFront(Node* Head, int data) {
+    Node* newNode = createNode(data);
 
     if (Head == NULL) {
         return newNode;
     }
     
     // Find the last node (Tail)
-    CSLL_Node* last = Head;
+    Node* last = Head;
     while (last->next != Head) {
         last = last->next;
     }
     
-    // Link the new node
     newNode->next = Head;
     last->next = newNode;
     
-    return newNode; // New node becomes the Head
+    return newNode;  // New node becomes Head
 }
 
-// --- Insert Rear ---
-CSLL_Node* insertRearCSLL(CSLL_Node* Head, int data) {
-    CSLL_Node* newNode = createCSLLNode(data);
+// --- Insert at Rear ---
+Node* insertAtRear(Node* Head, int data) {
+    Node* newNode = createNode(data);
 
     if (Head == NULL) {
         return newNode;
     }
     
     // Find the last node (Tail)
-    CSLL_Node* last = Head;
+    Node* last = Head;
     while (last->next != Head) {
         last = last->next;
     }
     
-    // Link the new node
-    newNode->next = Head;
     last->next = newNode;
+    newNode->next = Head;
     
-    return Head; // Head remains the same
+    return Head;
 }
 
-// --- Delete Front ---
-CSLL_Node* deleteFrontCSLL(CSLL_Node* Head) {
+// --- Delete at Front ---
+Node* deleteAtFront(Node* Head) {
     if (Head == NULL) {
         printf("List Empty\n");
         return NULL;
     }
 
-    CSLL_Node* Temp = Head;
+    Node* Temp = Head;
     
-    if (Temp->next == Head) { // Only one node
+    // Only one node
+    if (Temp->next == Head) {
         free(Temp);
         return NULL;
     }
 
-    // Find the last node (Tail)
-    CSLL_Node* last = Head;
+    // Find last node
+    Node* last = Head;
     while (last->next != Head) {
         last = last->next;
     }
     
-    Head = Temp->next;  // New Head
-    last->next = Head;  // Update Tail to point to new Head
-    free(Temp);         // Delete old Head
-    
+    Head = Temp->next;   // New head
+    last->next = Head;   // Fix tail link
+    free(Temp);
+
     return Head; 
 }
 
-// --- Delete Rear ---
-CSLL_Node* deleteRearCSLL(CSLL_Node* Head) {
+// --- Delete at Rear ---
+Node* deleteAtRear(Node* Head) {
     if (Head == NULL) {
         printf("List Empty\n");
         return NULL;
     }
 
-    CSLL_Node* Temp = Head;
-    
-    if (Temp->next == Head) { // Only one node
+    Node* Temp = Head;
+
+    // Only one node
+    if (Temp->next == Head) {
         free(Temp);
         return NULL;
     }
 
-    // Traverse to the node before the last node
-    CSLL_Node* Prev = NULL;
+    Node* Prev = NULL;
     while (Temp->next != Head) {
         Prev = Temp;
-        Temp = Temp->next; // Temp is the node to delete (Tail)
+        Temp = Temp->next;  // Temp reaches last node
     }
 
-    Prev->next = Head; // New Tail points to Head
+    Prev->next = Head;  
     free(Temp);
-    
-    return Head; 
-}
 
+    return Head;
+}
 
 // --- MAIN FUNCTION --- //
 int main() {
-    CSLL_Node* Head = NULL;
+    Node* Head = NULL;
 
     printf("Circular Singly Linked List\n");
 
     // Insertions
-    Head = insertFrontCSLL(Head, 10);
-    Head = insertFrontCSLL(Head, 20); 
-    Head = insertRearCSLL(Head, 30);  
+    Head = insertAtFront(Head, 10);
+    Head = insertAtFront(Head, 20); 
+    Head = insertAtRear(Head, 30);  
     
     printf("\nInitial List (20, 10, 30):\n");
-    displayCSLL(Head);
+    displayList(Head);
 
     // Deletions
-    Head = deleteRearCSLL(Head); // Delete 30
+    Head = deleteAtRear(Head); // Delete 30
     printf("\nAfter deleting rear (30):\n");
-    displayCSLL(Head); 
+    displayList(Head); 
 
-    Head = deleteFrontCSLL(Head); // Delete 20
+    Head = deleteAtFront(Head); // Delete 20
     printf("After deleting front (20):\n");
-    displayCSLL(Head); 
+    displayList(Head); 
     
-    Head = insertRearCSLL(Head, 40);
+    Head = insertAtRear(Head, 40);
     printf("\nAfter inserting rear (40):\n");
-    displayCSLL(Head); 
+    displayList(Head); 
     
     // Delete remaining nodes
-    Head = deleteFrontCSLL(Head);
-    Head = deleteFrontCSLL(Head);
+    Head = deleteAtFront(Head);
+    Head = deleteAtFront(Head);
     printf("\nAfter deleting remaining nodes:\n");
-    displayCSLL(Head);
+    displayList(Head);
     
     return 0;
 }
