@@ -2,24 +2,17 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <limits.h> 
 
-// Structure of a Node — Circular Doubly Linked List
+// Structure of a Node
 typedef struct Node {
     int data;
     struct Node *prev;
     struct Node *next;
-} *NODE; // NODE is a pointer to struct Node
-
-// Structure to return both Head and Tail pointers
-typedef struct {
-    NODE head;
-    NODE tail;
-} CDLL_Pointers; 
+} *Node; // 'Node' is now a pointer to struct Node
 
 // --- Create a Node ---
-NODE createNode(int data) {
-    NODE NN = (NODE)malloc(sizeof(struct Node)); 
+Node createNode(int data) {
+    Node NN = (Node)malloc(sizeof(struct Node));
 
     if (NN == NULL) {
         printf("No Memory\n");
@@ -33,154 +26,150 @@ NODE createNode(int data) {
     return NN;
 }
 
-// --- Insert Front (Version 1: with Tail) ---
-CDLL_Pointers insertFrontCDLL(NODE Head, NODE Tail, int data) {
-    NODE NN = createNode(data);
-    CDLL_Pointers result = {Head, Tail};
+// --- Insert Front ---
+Node insertFront(Node Head, int data) {
+    Node NN = createNode(data);
 
     if (Head == NULL) {
-        result.head = result.tail = NN;
-        return result;
+        return NN;
     }
     
+    // In a Circular Doubly Linked List, Tail is always Head->prev
+    Node Tail = Head->prev;
+
     NN->next = Head;
     NN->prev = Tail;
     Tail->next = NN;
     Head->prev = NN;
-    result.head = NN;
     
-    return result;
+    // NN becomes the new Head
+    return NN;
 }
 
-// --- Insert Rear (Version 1: with Tail) ---
-CDLL_Pointers insertRearCDLL(NODE Head, NODE Tail, int data) {
-    NODE NN = createNode(data);
-    CDLL_Pointers result = {Head, Tail};
+// --- Insert Rear ---
+Node insertRear(Node Head, int data) {
+    Node NN = createNode(data);
 
     if (Head == NULL) {
-        result.head = result.tail = NN;
-        return result;
+        return NN;
     }
     
+    Node Tail = Head->prev;
+
     NN->prev = Tail;
     NN->next = Head;
     Tail->next = NN;
     Head->prev = NN;
-    result.tail = NN;
     
-    return result;
+    // Head remains the same, NN is attached to the end
+    return Head;
 }
 
-// --- Delete Front (Version 1: with Tail) ---
-CDLL_Pointers deleteFrontCDLL(NODE Head, NODE Tail) {
-    CDLL_Pointers result = {Head, Tail};
-    
+// --- Delete Front ---
+Node deleteFront(Node Head) {
     if (Head == NULL) {
         printf("List Empty\n");
-        result.head = result.tail = NULL;
-        return result;
+        return NULL;
     }
     
-    NODE Temp = Head;
+    Node Tail = Head->prev;
+    Node Temp = Head;
 
+    // Only one node in the list
     if (Head == Tail) {
         free(Temp);
-        result.head = result.tail = NULL;
-        return result;
+        return NULL;
     }
     
-    result.head = Head->next;
-    result.head->prev = Tail;
-    Tail->next = result.head;
+    // Update links
+    Head = Head->next;
+    Head->prev = Tail;
+    Tail->next = Head;
     
     free(Temp);
     
-    return result;
+    return Head;
 }
 
-// --- Delete Rear (Version 1: with Tail) ---
-CDLL_Pointers deleteRearCDLL(NODE Head, NODE Tail) {
-    CDLL_Pointers result = {Head, Tail};
-    
+// --- Delete Rear ---
+Node deleteRear(Node Head) {
     if (Head == NULL) {
         printf("List Empty\n");
-        result.head = result.tail = NULL;
-        return result;
+        return NULL;
     }
     
-    NODE Temp = Tail;
+    Node Tail = Head->prev;
 
+    // Only one node in the list
     if (Head == Tail) {
-        free(Temp);
-        result.head = result.tail = NULL;
-        return result;
+        free(Tail);
+        return NULL;
     }
     
-    result.tail = Tail->prev;
-    result.tail->next = Head;
-    Head->prev = result.tail;
+    Node NewTail = Tail->prev;
     
-    free(Temp);
+    NewTail->next = Head;
+    Head->prev = NewTail;
     
-    return result;
+    free(Tail);
+    
+    // Head does not change
+    return Head;
 }
 
-// --- Insert at Position (Version 1: with Tail) ---
-CDLL_Pointers insertAtPosCDLL(NODE Head, NODE Tail, int pos, int data) {
-    CDLL_Pointers result = {Head, Tail};
-    
+// --- Insert at Position ---
+Node insertAtPos(Node Head, int pos, int data) {
     if (Head == NULL && pos != 1) {
         printf("Invalid Position: List Empty\n"); 
-        return result;
+        return NULL;
     }
 
     if (pos == 1) {
-        return insertFrontCDLL(Head, Tail, data);
+        return insertFront(Head, data);
     }
     
-    NODE Temp = Head;
+    Node Temp = Head;
     int count = 1;
     
     // Traverse to the node *before* the desired position (pos-1)
+    // Note: We stop if we loop back to Head to avoid infinite loop
     while (count < pos - 1 && Temp->next != Head) {
         Temp = Temp->next; 
         count++;
     }
 
-    // Check if we reached the end prematurely
-    if (count != pos - 1 && pos > 1) {
-        printf("Invalid Position\n");
-        return result;
-    }
-    
-    // Insertion is at the last position (Tail), handled by insertRear
-    if (Temp == Tail) {
-        return insertRearCDLL(Head, Tail, data);
+    // If pos is exactly count + 1, and we are at the last node, it's an insertRear
+    if (Temp->next == Head && count == pos - 1) {
+         return insertRear(Head, data);
     }
 
-    NODE NN = createNode(data);
+    // Check if valid position (if we wrapped around and count is still less)
+    if (count != pos - 1) {
+        printf("Invalid Position\n");
+        return Head;
+    }
+    
+    Node NN = createNode(data);
     NN->next = Temp->next;
     NN->prev = Temp;
     Temp->next->prev = NN;
     Temp->next = NN;
 
-    return result;
+    return Head;
 }
 
-// --- Delete at Position (Version 1: with Tail) ---
-CDLL_Pointers deleteAtPosCDLL(NODE Head, NODE Tail, int pos) {
-    CDLL_Pointers result = {Head, Tail};
-    
+// --- Delete at Position ---
+Node deleteAtPos(Node Head, int pos) {
     if (Head == NULL) {
         printf("List Empty\n"); 
-        return result;
+        return NULL;
     }
     
     if (pos == 1) {
-        return deleteFrontCDLL(Head, Tail);
+        return deleteFront(Head);
     }
     
-    NODE Curr = Head;
+    Node Curr = Head;
     int count = 1;
     
     // Traverse to the node *to be deleted* (pos)
@@ -191,14 +180,14 @@ CDLL_Pointers deleteAtPosCDLL(NODE Head, NODE Tail, int pos) {
     } while (Curr != Head);
 
     // Check if position is valid
-    if (count != pos) {
+    if (count != pos || Curr == Head) {
         printf("Invalid Position\n"); 
-        return result;
+        return Head;
     }
 
-    // Handle deletion of the Tail node
-    if (Curr == Tail) {
-        return deleteRearCDLL(Head, Tail);
+    // Handle deletion of the Tail node (last node)
+    if (Curr->next == Head) {
+        return deleteRear(Head);
     }
 
     // Delete node at intermediate position
@@ -206,18 +195,18 @@ CDLL_Pointers deleteAtPosCDLL(NODE Head, NODE Tail, int pos) {
     Curr->next->prev = Curr->prev;
     free(Curr);
 
-    return result;
+    return Head;
 }
 
 // --- Traversal (Forward) ---
-void displayCDLL(NODE Head) {
+void display(Node Head) {
     if (Head == NULL) {
         printf("List Empty\n");
         return;
     }
     
-    NODE Temp = Head;
-    printf("CDLL (Forward): ");
+    Node Temp = Head;
+    printf("List (Forward): ");
     
     do {
         printf("%d <-> ", Temp->data);
@@ -228,15 +217,15 @@ void displayCDLL(NODE Head) {
 }
 
 // --- Traversal (Backward) ---
-void reverseDisplayCDLL(NODE Head) {
+void reverseDisplay(Node Head) {
     if (Head == NULL) {
         printf("List Empty\n");
         return;
     }
     
-    NODE Tail = Head->prev; 
-    NODE Temp = Tail;
-    printf("CDLL (Backward): ");
+    Node Tail = Head->prev; 
+    Node Temp = Tail;
+    printf("List (Backward): ");
     
     do {
         printf("%d <-> ", Temp->data);
@@ -247,12 +236,12 @@ void reverseDisplayCDLL(NODE Head) {
 }
 
 // --- Count Nodes ---
-int countNodesCDLL(NODE Head) {
+int countNodes(Node Head) {
     if (Head == NULL) {
         return 0;
     }
     
-    NODE Temp = Head;
+    Node Temp = Head;
     int count = 0;
     
     do {
@@ -264,13 +253,13 @@ int countNodesCDLL(NODE Head) {
 }
 
 // --- Search Element ---
-int searchCDLL(NODE Head, int key) {
+int search(Node Head, int key) {
     if (Head == NULL) {
         printf("Empty List\n"); 
         return -1; 
     }
     
-    NODE Temp = Head;
+    Node Temp = Head;
     int pos = 1;
 
     do {
@@ -286,43 +275,37 @@ int searchCDLL(NODE Head, int key) {
     return -1;
 }
 
-
 // --- MAIN FUNCTION --- //
 int main() {
-    NODE Head = NULL;
-    NODE Tail = NULL;
-    CDLL_Pointers list_ptrs = {Head, Tail};
+    Node Head = NULL;
 
     printf("Circular Doubly Linked List\n");
 
     // Insertions
-    list_ptrs = insertFrontCDLL(list_ptrs.head, list_ptrs.tail, 10);
-    list_ptrs = insertFrontCDLL(list_ptrs.head, list_ptrs.tail, 20); 
-    list_ptrs = insertRearCDLL(list_ptrs.head, list_ptrs.tail, 30);  
-    list_ptrs = insertAtPosCDLL(list_ptrs.head, list_ptrs.tail, 2, 15); // Insert 15 at pos 2
-    Head = list_ptrs.head; Tail = list_ptrs.tail;
+    Head = insertFront(Head, 10);
+    Head = insertFront(Head, 20); 
+    Head = insertRear(Head, 30);  
+    Head = insertAtPos(Head, 2, 15); // Insert 15 at pos 2
     
     printf("\nInitial List (20, 15, 10, 30):\n");
-    displayCDLL(Head);
-    reverseDisplayCDLL(Head);
-    printf("Node Count: %d\n", countNodesCDLL(Head));
+    display(Head);
+    reverseDisplay(Head);
+    printf("Node Count: %d\n", countNodes(Head));
 
     // Deletions
     // Delete 10 (at pos 3: 20 -> 15 -> **10** -> 30)
-    list_ptrs = deleteAtPosCDLL(Head, Tail, 3); 
-    Head = list_ptrs.head; Tail = list_ptrs.tail;
+    Head = deleteAtPos(Head, 3); 
     printf("\nAfter deleting node at position 3 (10):\n");
-    displayCDLL(Head); 
+    display(Head); 
 
-    // Delete 30 (Tail)
-    list_ptrs = deleteRearCDLL(Head, Tail); 
-    Head = list_ptrs.head; Tail = list_ptrs.tail;
+    // Delete 30 (which is now at the Rear)
+    Head = deleteRear(Head); 
     printf("After deleting rear node (30):\n");
-    displayCDLL(Head); 
+    display(Head); 
     
     // Search element
     printf("\nSearching element:\n");
-    searchCDLL(Head, 15);
+    search(Head, 15);
     
     return 0;
 }
