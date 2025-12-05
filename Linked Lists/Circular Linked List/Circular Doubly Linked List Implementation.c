@@ -10,58 +10,60 @@ typedef struct Node {
     struct Node *next;
 } *Node; // 'Node' is now a pointer to struct Node
 
+// 
+
 // --- Create a Node ---
 Node createNode(int data) {
-    Node NN = (Node)malloc(sizeof(struct Node));
+    Node newNode = (Node)malloc(sizeof(struct Node));
 
-    if (NN == NULL) {
+    if (newNode == NULL) {
         printf("No Memory\n");
         exit(1);
     }
     
-    NN->data = data;
-    NN->prev = NN; 
-    NN->next = NN; 
+    newNode->data = data;
+    newNode->prev = newNode; 
+    newNode->next = newNode; 
     
-    return NN;
+    return newNode;
 }
 
 // --- Insert Front ---
 Node insertFront(Node Head, int data) {
-    Node NN = createNode(data);
+    Node newNode = createNode(data);
 
     if (Head == NULL) {
-        return NN;
+        return newNode;
     }
     
     // In a Circular Doubly Linked List, Tail is always Head->prev
     Node Tail = Head->prev;
 
-    NN->next = Head;
-    NN->prev = Tail;
-    Tail->next = NN;
-    Head->prev = NN;
+    newNode->next = Head;
+    newNode->prev = Tail;
+    Tail->next = newNode;
+    Head->prev = newNode;
     
-    // NN becomes the new Head
-    return NN;
+    // newNode becomes the new Head
+    return newNode;
 }
 
 // --- Insert Rear ---
 Node insertRear(Node Head, int data) {
-    Node NN = createNode(data);
+    Node newNode = createNode(data);
 
     if (Head == NULL) {
-        return NN;
+        return newNode;
     }
     
     Node Tail = Head->prev;
 
-    NN->prev = Tail;
-    NN->next = Head;
-    Tail->next = NN;
-    Head->prev = NN;
+    newNode->prev = Tail;
+    newNode->next = Head;
+    Tail->next = newNode;
+    Head->prev = newNode;
     
-    // Head remains the same, NN is attached to the end
+    // Head remains the same, newNode is attached to the end
     return Head;
 }
 
@@ -140,7 +142,7 @@ Node insertAtPos(Node Head, int pos, int data) {
 
     // If pos is exactly count + 1, and we are at the last node, it's an insertRear
     if (Temp->next == Head && count == pos - 1) {
-         return insertRear(Head, data);
+          return insertRear(Head, data);
     }
 
     // Check if valid position (if we wrapped around and count is still less)
@@ -149,11 +151,11 @@ Node insertAtPos(Node Head, int pos, int data) {
         return Head;
     }
     
-    Node NN = createNode(data);
-    NN->next = Temp->next;
-    NN->prev = Temp;
-    Temp->next->prev = NN;
-    Temp->next = NN;
+    Node newNode = createNode(data);
+    newNode->next = Temp->next;
+    newNode->prev = Temp;
+    Temp->next->prev = newNode;
+    Temp->next = newNode;
 
     return Head;
 }
@@ -180,7 +182,7 @@ Node deleteAtPos(Node Head, int pos) {
     } while (Curr != Head);
 
     // Check if position is valid
-    if (count != pos || Curr == Head) {
+    if (count != pos || (Curr == Head && count != 1)) {
         printf("Invalid Position\n"); 
         return Head;
     }
