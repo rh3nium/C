@@ -1,6 +1,6 @@
 ## 💻 C Overview
 
-![C language image](https://upload.wikimedia.org/wikipedia/commons/1/19/C_Logo.png)
+<img width="1584" height="396" alt="C Basics" src="https://github.com/user-attachments/assets/2eba4d7a-8ac2-4a3a-b98b-f15af881b7b1" />
 
 **C** is a powerful, general-purpose programming language that provides a foundation for many modern languages. Known for its **efficiency** and **control**, C is commonly used in system programming, embedded development, and operating systems.
 
