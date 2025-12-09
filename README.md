@@ -1,4 +1,4 @@
-## 💻 C Overview
+## 💻 C Language Overview
 
 <img width="1584" height="396" alt="C Basics" src="https://github.com/user-attachments/assets/2eba4d7a-8ac2-4a3a-b98b-f15af881b7b1" />
 
