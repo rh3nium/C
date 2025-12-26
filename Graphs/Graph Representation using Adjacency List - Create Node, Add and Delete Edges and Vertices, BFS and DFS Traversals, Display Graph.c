@@ -195,7 +195,7 @@ void DFS(int start) {
     }
 }
 
-// Function to print the graph
+// Function to display the graph
 void printGraph() {
     for (int i = 0; i < vertexCount; i++) {
         
